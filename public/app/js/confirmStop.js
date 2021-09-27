@@ -1,10 +1,10 @@
-const confirmDelete = Vue.component("confirm-delete", {
+const confirmStop = Vue.component("confirm-stop", {
   props: ["job"],
   methods: {
     deleteOne(job) {
       const { _id, job: { disabled = false } } = job;
       console.log(job)
-      const url = `api/jobs/delete`;
+      const url = `api/jobs/enable`;
       let body = { jobIds: [_id], disabled };
       return axios
         .post(url, body)
@@ -17,12 +17,12 @@ const confirmDelete = Vue.component("confirm-delete", {
     },
   },
   template: `
-  <div class="modal fade" id="modalDeleteSure" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="modalStopSure" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <!-- Modal -->
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Confirm Delete Permanently</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Confirm Stop Permanently</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -32,7 +32,7 @@ const confirmDelete = Vue.component("confirm-delete", {
           <p>Name: {{job.job.name}}</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal" @click="deleteOne(job)">Delete</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" @click="deleteOne(job)">stop</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
         </div>
       </div>

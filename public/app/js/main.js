@@ -9,6 +9,8 @@ const app = Vue.component("app", {
     showConfirmMulti: false,
     showConfirmRequeue: false,
     showConfirmRequeueMulti: false,
+    showConfirmStop: false,
+    showConfirmStart: false,
     showNewJob: false,
     jobData: {},
     deletec: false,
@@ -52,6 +54,15 @@ const app = Vue.component("app", {
     confirmDeleteMulti(data) {
       this.jobData = data;
       this.showConfirmMulti = true;
+    },
+    confirmStop(data) {
+      this.jobData = data;
+      this.showConfirmStop = true;
+    },
+    confirmStart(data) {
+      // debugger
+      this.jobData = data;
+      this.showConfirmStart = true;
     },
     confirmRequeue(data) {
       this.jobData = data;
@@ -195,7 +206,7 @@ const app = Vue.component("app", {
         <div class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
           <div class="d-flex">
             <div>
-              <a class="navbar-brand col-sm-10 col-md-10 mr-0 tittle"> Agendash</a>
+              <a class="navbar-brand col-sm-10 col-md-10 mr-0 tittle"> Agendash-DCPOOL</a>
             </div>
             <div class='d-md-none w-50'>
               <div id="mySidebar" class="sidebar-collapse" @click="closeNav()">
@@ -241,6 +252,8 @@ const app = Vue.component("app", {
             </div>
             <div class="col-12 ">
               <job-list
+                  v-on:confirm-stop="confirmStop"
+                  v-on:confirm-start="confirmStart"
                   v-on:confirm-delete="confirmDelete"
                   v-on:confirm-multi-delete="confirmDeleteMulti"
                   v-on:confirm-requeue="confirmRequeue"
@@ -260,7 +273,7 @@ const app = Vue.component("app", {
       </div>
       <div class="row bg-dark py-3">
         <div class="col-6 m-auto text-light text-center">
-          <small>UI written by <a class="text-light" href="https://www.softwareontheroad.com/about" target="_BLANK">Sam Quinn</a>. Backend by Agenda team.</small>
+          <small>UI written by <a class="text-light" href="https://www.softwareontheroad.com/about" target="_BLANK">Sam Quinn</a>. Backend by DCPOOL.</small>
         </div>
       </div>
       <job-detail v-if="showDetail" v-bind:job="jobData"></job-detail>
@@ -270,6 +283,8 @@ const app = Vue.component("app", {
       <confirm-multi-requeue v-if="showConfirmRequeueMulti" v-on:ready-clean="readyClean" v-on:popup-message="popupmessage('multirequeue')" v-on:refresh-data="refreshData" v-bind:jobs="jobData"></confirm-multi-requeue>
       <popup-message :deletec="deletec" :requeuec="requeuec" :createc="createc"></popup-message>
       <new-job v-if="showNewJob" v-on:popup-message="popupmessage('create')" v-on:refresh-data="fetchData"></new-job>
-  </div>
+      <confirm-stop v-if="showConfirmStop" v-on:popup-message="popupmessage('stop')" v-on:refresh-data="refreshData" v-bind:job="jobData"></confirm-stop>
+      <confirm-start v-if="showConfirmStart" v-on:popup-message="popupmessage('stop')" v-on:refresh-data="refreshData" v-bind:job="jobData"></confirm-start>
+      </div>
   `,
 });

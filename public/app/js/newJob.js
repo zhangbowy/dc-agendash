@@ -4,7 +4,7 @@ const newJob = Vue.component("new-job", {
     jobName: "",
     jobSchedule: "",
     jobRepeatEvery: "",
-    jobData: `{ "name": "Your medatada goes here..." }`,
+    jobData: `// 你的代码`,
   }),
   props: ["job"],
   methods: {
@@ -13,14 +13,15 @@ const newJob = Vue.component("new-job", {
         (this.jobName = ""),
         (this.jobSchedule = ""),
         (this.jobRepeatEvery = ""),
-        (this.jobData = `{ "name": "Your medatada goes here..." }`);
+        (this.jobData = `// 你的代码`);
     },
     create() {
       const url = `api/jobs/create`;
 
       let jobData = "";
       try {
-        jobData = JSON.parse(this.jobData);
+        // jobData = JSON.parse(this.jobData);
+        jobData = this.jobData
       } catch (err) {
         this.jobDataParseError = err.message;
         return;
@@ -72,7 +73,7 @@ const newJob = Vue.component("new-job", {
                 <small id="jobRepeatEvery" class="form-text text-muted">Number/Every Unit i.e: "1 month" or "3 hours"</small>
               </div>
               <div class="form-group">
-                <label for="jobData">Job Metadata</label>
+                <label for="jobData">Job Code</label>
                 <prism-editor class="json-editor" :lineNumbers="true" v-model="jobData" language="json"></prism-editor>
                 <small class="form-text text-muted">{{jobDataParseError}}</small>
               </div>

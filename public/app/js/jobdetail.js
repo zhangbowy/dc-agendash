@@ -2,7 +2,8 @@ const jobDetail = Vue.component("job-detail", {
   props: ["job"],
   filters: {
     formatJSON(jsonstr) {
-      return JSON.stringify(jsonstr, null, 2);
+      // return JSON.stringify(jsonstr, null, 2);
+      return jsonstr;
     },
   },
   methods: {
@@ -28,7 +29,7 @@ const jobDetail = Vue.component("job-detail", {
             <p><strong>Last run started: </strong>{{ formatDate(job.job.lastRunAt) }}</p>
           </div>
         </div>
-        <p><strong>Metadata: </strong></p>
+        <p><strong>Code: </strong></p>
         <prism-editor class="json-editor" :lineNumbers="true" :readonly="true" :code="job.job.data | formatJSON" language="json"></prism-editor>
         <div v-if='job.failed' class="row mt-3">
           <div class="col pt-3 bg-danger text-light">

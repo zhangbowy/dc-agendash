@@ -148,9 +148,12 @@ const jobList = Vue.component("job-list", {
                   <td class="job-finishedAt" :title="formatTitle(job.job.lastFinishedAt)" @click="toggleList(job)"> {{ formatDate(job.job.lastFinishedAt) }} </td>
                   <td class="job-lockedAt" :title="formatTitle(job.job.lockedAt)" @click="toggleList(job)"> {{ formatDate(job.job.lockedAt) }} </td>
                   <td class="job-actions">
-                    <i class="material-icons md-dark md-custom action-btn viewData text-primary" data-toggle="modal" data-target="#modalRequeueSure" @click="$emit('confirm-requeue', job)" data-placement="left" title="Requeue">update</i>
-                    <i class="material-icons md-dark md-custom action-btn viewData text-success" data-toggle="modal" data-target="#modalData" @click="$emit('show-job-detail', job)" data-placement="top" title="Job Data">visibility</i>
-                    <i class="material-icons md-dark md-custom action-btn viewData text-danger" data-toggle="modal" data-target="#modalDeleteSure" @click="$emit('confirm-delete', job)" data-placement="top" title="Delete permanently">delete_forever</i>
+                    <i class="material-icons md-dark md-custom action-btn viewData text-primary" data-toggle="modal" data-target="#modalRequeueSure" @click="$emit('confirm-requeue', job)" data-placement="left" title="更新任务">update</i>
+                    <i class="material-icons md-dark md-custom action-btn viewData text-success" data-toggle="modal" data-target="#modalData" @click="$emit('show-job-detail', job)" data-placement="top" title="查看任务详情">visibility</i>
+                    <i class="material-icons md-dark md-custom action-btn viewData text-success" data-toggle="modal" data-target="#modalData" @click="$emit('show-job-detail', job)" data-placement="top" title="编辑任务规则">edit</i>
+                    <i class="material-icons md-dark md-custom action-btn viewData text-danger" data-toggle="modal" data-target="#modalDeleteSure" @click="$emit('confirm-delete', job)" data-placement="top" title="删除任务">delete_forever</i>
+                    <i v-if="!job.job.disabled" class="material-icons md-dark md-custom action-btn viewData text-danger" data-toggle="modal" data-target="#modalStopSure" @click="$emit('confirm-stop', job)" data-placement="top" title="暂停任务">stop</i>
+                    <i v-if="job.job.disabled" class="material-icons md-dark md-custom action-btn viewData text-danger" data-toggle="modal" data-target="#modalStartSure" @click="$emit('confirm-start', job)" data-placement="top" title="开启任务">play_arrow</i>
                 </td>
             </tr>
           </tbody>
