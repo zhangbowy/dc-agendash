@@ -206,7 +206,7 @@ const app = Vue.component("app", {
         <div class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
           <div class="d-flex">
             <div>
-              <a class="navbar-brand col-sm-10 col-md-10 mr-0 tittle"> Agendash-DCPOOL</a>
+              <a class="navbar-brand col-sm-10 col-md-10 mr-0 tittle">DCPOOL定时任务平台</a>
             </div>
             <div class='d-md-none w-50'>
               <div id="mySidebar" class="sidebar-collapse" @click="closeNav()">
